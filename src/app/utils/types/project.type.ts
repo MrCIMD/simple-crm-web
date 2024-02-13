@@ -32,6 +32,7 @@ export enum Visibility {
 export type Project = {
   id: string;
   name: string;
+  picture: string;
   description: string;
   visibility: Visibility;
   modules: Module[];

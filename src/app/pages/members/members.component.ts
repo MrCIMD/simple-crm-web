@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-members',
   standalone: true,
   imports: [],
-  templateUrl: './home.component.html',
+  templateUrl: './members.component.html',
   styles: ``
 })
-export default class HomeComponent {
+export default class MembersComponent {
 
 }

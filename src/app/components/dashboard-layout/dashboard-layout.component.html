@@ -1,10 +1,38 @@
-<mat-toolbar color="primary">
-  <span class="ml-4 font-bold text-xl">Genius Munyaal</span>
+<mat-toolbar color="primary" class="gap-4">
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon svgIcon="menu"></mat-icon>
+  </button>
+
+  <span class="ml-4 font-medium text-xl font-brand">Genius Munyaal</span>
 
   <span class="ml-auto"></span>
+
+  <button mat-icon-button>
+    <mat-icon svgIcon="bell"></mat-icon>
+  </button>
+
+  <button mat-icon-button>
+    <mat-icon svgIcon="account"></mat-icon>
+  </button>
 </mat-toolbar>
 
 <mat-drawer-container class="h-[calc(100vh-4rem)] w-screen">
+  <mat-drawer #drawer class="w-60" [mode]="!mediaQueryList.matches ? 'side' : 'over'"
+              [opened]="!mediaQueryList.matches">
+    <app-toggle-project/>
+
+    <mat-list>
+      <div mat-subheader class="font-bold">Menú</div>
+      @for (link of routes; track link.route) {
+        <mat-list-item [routerLink]="link.route" routerLinkActive="mdc-list-item--activated">
+          <mat-icon matListItemIcon [svgIcon]="link.icon"></mat-icon>
+          <div matListItemTitle>{{ link.name }}</div>
+        </mat-list-item>
+      }
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-drawer>
+
   <div class="container mx-auto">
     <ng-content/>
   </div>

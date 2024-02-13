@@ -1,0 +1,13 @@
+import { Project, Visibility } from "@/utils/types";
+
+/**
+ * Datos del proyecto por predeterminado
+ * */
+export const DEFAULT_PROJECT: Project = {
+  id: '45196f0a-ca95-11ee-a506-0242ac120002',
+  name: 'Proyecto 1',
+  picture: 'https://random.imagecdn.app/500/500',
+  description: 'Breve descripción del proyecto 1',
+  visibility: Visibility.PUBLIC,
+  modules: []
+}

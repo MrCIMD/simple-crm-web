@@ -19,9 +19,9 @@ export const routes: LinkType[] = [
     roles: [RoleEnum.DEVELOPER, RoleEnum.ADMINISTRATOR, RoleEnum.CONTRIBUTOR]
   },
   {
-    route: 'projects',
-    icon: 'chart-timeline',
-    name: 'Proyectos',
+    route: 'members',
+    icon: 'account-group',
+    name: 'Miembros',
     display: true,
     order: 3,
     roles: [RoleEnum.DEVELOPER, RoleEnum.ADMINISTRATOR, RoleEnum.CONTRIBUTOR]

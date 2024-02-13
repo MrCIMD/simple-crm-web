@@ -10,8 +10,8 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/panel/panel.component')
   },
   {
-    path: 'projects',
-    loadComponent: () => import('./pages/projects/projects.component')
+    path: 'members',
+    loadComponent: () => import('./pages/members/members.component')
   },
   {
     path: '**',

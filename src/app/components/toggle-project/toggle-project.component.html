@@ -1,0 +1,14 @@
+<form class="flex flex-col">
+  <div matRipple class="flex items-center px-3 cursor-pointer border-b border-grey-lighter">
+    <app-avatar [size]="3" [source]="value.picture"/>
+
+    <div class="flex flex-col ml-4 py-4">
+      <p class="font-medium truncate w-36">
+        {{ value.name }}
+      </p>
+      <p class="mt-1 text-sm truncate w-36">
+        {{ value.description }}
+      </p>
+    </div>
+  </div>
+</form>

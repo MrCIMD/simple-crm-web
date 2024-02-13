@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { TitleComponent } from "@app/components/title/title.component";
 
 @Component({
   selector: 'app-panel',
   standalone: true,
-    imports: [
-        TitleComponent
-    ],
+  imports: [],
   templateUrl: './panel.component.html',
   styles: ``
 })

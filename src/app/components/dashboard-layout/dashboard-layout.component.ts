@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { ToggleProjectComponent } from "@/components/toggle-project/toggle-project.component";
 import { isPlatformBrowser } from '@angular/common';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";
@@ -6,14 +7,14 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatListModule } from "@angular/material/list";
 import { MatIcon } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
-import { LinkType } from "@app/utils/types";
-import { routes } from "@app/utils/routes";
 import { MediaMatcher } from "@angular/cdk/layout";
+import { LinkType } from "@/utils/types";
+import { routes } from "@/utils/routes";
 
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatToolbarModule, MatListModule, RouterModule, MatIcon],
+  imports: [MatSidenavModule, MatButtonModule, MatToolbarModule, MatListModule, RouterModule, MatIcon, ToggleProjectComponent],
   templateUrl: './dashboard-layout.component.html',
   styles: ``
 })
