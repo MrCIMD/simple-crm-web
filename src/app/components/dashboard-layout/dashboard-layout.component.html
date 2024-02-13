@@ -1,27 +1,11 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon svgIcon="menu"></mat-icon>
-  </button>
-  <span>My App</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <!--    <mat-icon>favorite</mat-icon>-->
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <!--    <mat-icon>share</mat-icon>-->
-  </button>
+  <span class="ml-4 font-bold text-xl">Genius Munyaal</span>
+
+  <span class="ml-auto"></span>
 </mat-toolbar>
 
-<mat-drawer-container class="min-h-screen w-screen" autosize>
-  <mat-drawer #drawer class="p-4 w-60" mode="side">
-    <p>Auto-resizing sidenav</p>
-  </mat-drawer>
-
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
+<mat-drawer-container class="h-[calc(100vh-4rem)] w-screen">
+  <div class="container mx-auto">
+    <ng-content/>
   </div>
-
 </mat-drawer-container>
-
