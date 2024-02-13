@@ -3,7 +3,7 @@
     <mat-icon svgIcon="menu"></mat-icon>
   </button>
 
-  <span class="ml-4 font-medium text-xl font-brand">Genius Munyaal</span>
+  <span class="ml-4 font-medium text-xl font-brand">Genius Munyaal - {{ currentRoute }}</span>
 
   <span class="ml-auto"></span>
 
@@ -17,7 +17,7 @@
 </mat-toolbar>
 
 <mat-drawer-container class="h-[calc(100vh-4rem)] w-screen">
-  <mat-drawer #drawer class="w-60" [mode]="!mediaQueryList.matches ? 'side' : 'over'"
+  <mat-drawer #drawer class="flex flex-col w-60" [mode]="!mediaQueryList.matches ? 'side' : 'over'"
               [opened]="!mediaQueryList.matches">
     <app-toggle-project/>
 
@@ -29,7 +29,7 @@
           <div matListItemTitle>{{ link.name }}</div>
         </mat-list-item>
       }
-      <mat-divider></mat-divider>
+      <mat-divider/>
     </mat-list>
   </mat-drawer>
 

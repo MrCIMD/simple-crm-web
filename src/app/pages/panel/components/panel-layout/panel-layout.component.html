@@ -1,0 +1,14 @@
+<nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
+  @for (link of routes; track link.route) {
+    <a mat-tab-link [routerLink]="link.route" [routerLinkActiveOptions]="{exact: true}" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+      <mat-icon [svgIcon]="link.icon" class="mr-2"></mat-icon>
+      {{ link.name }}
+    </a>
+  }
+</nav>
+
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+<div class="mt-4">
+  <router-outlet></router-outlet>
+</div>
