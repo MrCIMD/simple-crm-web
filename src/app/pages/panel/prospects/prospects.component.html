@@ -1,5 +1,14 @@
-<div cdkDropList cdkDropListOrientation="horizontal" class="max-w-full">
-  <div>
-
+<div cdkDropList cdkDropListOrientation="horizontal" class="dropped-list" (cdkDropListDropped)="drop($event)">
+  <div class="list-content">
+    @for (timePeriod of timePeriods; track timePeriods) {
+      <div class="draggable-box" cdkDrag>
+        {{ timePeriod }}
+        <div class="cdk-placeholder" *cdkDragPlaceholder></div>
+      </div>
+    }
+    <button mat-stroked-button class="w-80">
+      Nueva columna
+      <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
+    </button>
   </div>
 </div>
