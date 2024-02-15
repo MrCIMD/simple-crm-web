@@ -1,5 +1,4 @@
-import { LinkType } from "./types";
-import { RoleEnum } from "./enums";
+import { LinkType, RoleEnum } from "./types";
 
 export const routes: LinkType[] = [
   {

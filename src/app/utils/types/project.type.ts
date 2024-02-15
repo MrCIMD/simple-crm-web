@@ -1,5 +1,7 @@
+import { Visibility } from "@/utils/enums";
+
 /**
- * Define el tipo de proyecto, dependiendo el tipo son las funciones a las que se tendran acceso
+ * Define el tipo de proyecto, dependiendo el tipo son las funciones a las que se tendrán acceso
  * */
 export enum Module {
   /**
@@ -13,21 +15,7 @@ export enum Module {
 }
 
 /**
- * Define el nivel de visibilidad
- * */
-export enum Visibility {
-  /**
-   * Público - No se requiere permiso para visualizar o editar el contenido
-   * */
-  PUBLIC,
-  /**
-   * Privado - Se requiere permiso para visualizar o editar el contenido
-   * */
-  PRIVATE,
-}
-
-/**
- * Proyectos
+ * Proyecto
  * */
 export type Project = {
   id: string;

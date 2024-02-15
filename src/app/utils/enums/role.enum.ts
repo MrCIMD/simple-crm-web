@@ -1,5 +1,0 @@
-export enum RoleEnum {
-  DEVELOPER,
-  ADMINISTRATOR,
-  CONTRIBUTOR
-}

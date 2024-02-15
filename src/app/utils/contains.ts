@@ -1,4 +1,5 @@
-import { Project, Visibility } from "@/utils/types";
+import { Project } from "@/utils/types";
+import { Visibility } from "@/utils/enums";
 
 /**
  * Datos del proyecto por predeterminado

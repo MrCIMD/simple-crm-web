@@ -1,4 +1,4 @@
-import { RoleEnum } from "../enums";
+import { RoleEnum } from ".";
 
 export type LinkType = {
   route: string;
