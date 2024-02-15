@@ -86,8 +86,8 @@ export type Prospect = {
   contacts: Contact[];
   comments: ProspectComment[];
   officialSites: OfficialSite[];
-  project: Project;
-  state: State;
+  project?: Project;
+  state?: State;
   owner: User;
   createdAt: Date;
   updatedAt: Date;

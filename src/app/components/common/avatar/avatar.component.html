@@ -3,7 +3,8 @@
   [ngSrc]="source"
   [style.width.rem]="size"
   [style.height.rem]="size"
-  class="object-none rounded"
+  [ngClass]="{'rounded': !round, 'rounded-full': round}"
   height="512"
   width="512"
+  class="object-none"
 />
