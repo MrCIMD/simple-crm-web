@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
-import {DashboardLayoutComponent} from "./components/dashboard-layout/dashboard-layout.component";
+import {DashboardLayoutComponent} from "@components/layout/dashboard-layout/dashboard-layout.component";
 import {DomSanitizer} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
 

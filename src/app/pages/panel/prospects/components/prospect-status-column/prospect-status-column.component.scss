@@ -1,0 +1,11 @@
+.draggable-box {
+  @apply w-72 h-[calc(100vh-9rem)] bg-gray-100 rounded border flex flex-col gap-2 px-2 py-2;
+}
+
+.draggable-box:last-child {
+  @apply border-none;
+}
+
+.cdk-column-placeholder {
+  @apply w-72 h-[calc(100vh-9rem)] bg-gray-100 rounded border-dotted border-4 border-primary-200 transition-transform duration-300 ease-cubic-bezier;
+}

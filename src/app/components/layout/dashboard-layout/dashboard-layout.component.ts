@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { ToggleProjectComponent } from "@/components/toggle-project/toggle-project.component";
+import { ToggleProjectComponent } from "@components/layout/toggle-project/toggle-project.component";
 import { isPlatformBrowser } from '@angular/common';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";

@@ -1,29 +1,7 @@
 .dropped-list {
-  @apply w-full flex overflow-x-auto;
+  @apply w-full flex overflow-x-auto pb-1;
 }
 
 .list-content {
   @apply flex flex-nowrap gap-3;
-}
-
-.draggable-box {
-  @apply w-80 h-[calc(100vh-9rem)] bg-gray-100 rounded border flex flex-col gap-2 px-2 py-2;
-}
-
-.draggable-box:last-child {
-  @apply border-none;
-}
-
-.dropped-list.cdk-drop-list-dragging .draggable-box:not(.cdk-drag-placeholder) {
-  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.cdk-column-placeholder {
-  @apply w-80 h-[calc(100vh-8.4rem)] bg-gray-100 rounded border-dotted border-4 border-primary-200;
-  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.cdk-row-placeholder {
-  @apply min-h-20 bg-gray-100 rounded border-dotted border-4 border-primary-200;
-  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
 }

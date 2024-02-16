@@ -1,0 +1,32 @@
+<div cdkDrag [cdkDragData]="collection" [id]="collection.id">
+  <div class="draggable-box">
+    <div class="flex justify-between items-center">
+      <h5 class="font-medium text-lg">{{ collection.name }}</h5>
+      <mat-icon svgIcon="drag" cdkDragHandle></mat-icon>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div
+      cdkDropList
+      class="flex flex-col gap-3 flex-1 pr-1 overflow-y-scroll"
+      [id]="collection.id"
+      [cdkDropListData]="collection.prospects"
+      [cdkDropListConnectedTo]="connectedList"
+      (cdkDropListDropped)="rowsDrop($event)"
+    >
+      @for (prospect of collection.prospects; track prospect.id) {
+        <app-prospect-card [prospect]="prospect"/>
+      }
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <button mat-stroked-button class="w-full">
+      Nuevo prospecto
+      <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
+    </button>
+  </div>
+
+  <div class="cdk-column-placeholder" *cdkDragPlaceholder></div>
+</div>

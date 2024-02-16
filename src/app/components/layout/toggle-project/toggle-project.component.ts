@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { MatInputModule } from "@angular/material/input";
-import { AvatarComponent } from '@components/common/avatar/avatar.component';
+import { AvatarComponent } from '@components/avatar/avatar.component';
 import { Project } from "@/utils/types";
 import { DEFAULT_PROJECT } from "@/utils/contains";
 import { MatRippleModule } from "@angular/material/core";
