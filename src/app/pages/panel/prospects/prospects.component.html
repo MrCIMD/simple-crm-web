@@ -1,58 +1,71 @@
-<div cdkDropListGroup>
-  <div class="dropped-list" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
-    <div class="list-content">
-      @for (collection of collections; track collection.id) {
-        <div class="draggable-box" cdkDrag>
-          <div class="flex justify-between items-center">
-            <h5 class="font-medium text-lg">{{ collection.name }}</h5>
+<div
+  cdkDropList
+  class="dropped-list"
+  cdkDropListOrientation="horizontal"
+  [cdkDropListData]="collections"
+  (cdkDropListDropped)="columnsDrop($event)"
+>
+  <div class="list-content" cdkDropListGroup>
+    @for (collection of collections; track collection.id) {
+      <div class="draggable-box" cdkDrag [cdkDragData]="collection">
+        <div class="cdk-column-placeholder" *cdkDragPlaceholder></div>
 
-            <mat-icon svgIcon="drag" cdkDragHandle></mat-icon>
-          </div>
-
-          <mat-divider></mat-divider>
-
-          <div class="flex flex-col gap-3 flex-1" cdkDropList [cdkDropListData]="collection.prospects"
-               (cdkDropListDropped)="prospectDrop($event)">
-            @for (prospect of collection.prospects; track prospect.id) {
-              <div class="flex flex-col gap-2 border p-2 bg-white hover:shadow cursor-pointer" cdkDrag>
-                <div class="flex justify-between">
-                  <h5 class="font-medium w-full truncate">
-                    {{ prospect.name }}
-                  </h5>
-
-                  <mat-icon svgIcon="drag" class="cursor-move" cdkDragHandle></mat-icon>
-                </div>
-
-                <div class="flex justify-between items-center">
-                  <p>{{ prospect.createdAt | date:'medium' }}</p>
-
-                  <app-avatar
-                    round
-                    [size]="2"
-                    [source]="prospect.owner.picture"
-                    [matTooltip]="prospect.owner.name"
-                  />
-                </div>
-
-                <div class="cdk-prospect-placeholder" *cdkDragPlaceholder></div>
-              </div>
-            }
-          </div>
-
-          <mat-divider></mat-divider>
-
-          <button mat-stroked-button class="w-full">
-            Nuevo prospecto
-            <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
-          </button>
-
-          <div class="cdk-placeholder" *cdkDragPlaceholder></div>
+        <div class="flex justify-between items-center">
+          <h5 class="font-medium text-lg">{{ collection.name }}</h5>
+          <mat-icon svgIcon="drag" cdkDragHandle></mat-icon>
         </div>
-      }
-      <button mat-stroked-button class="w-80">
-        Nueva columna
-        <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
-      </button>
-    </div>
+
+        <mat-divider></mat-divider>
+
+        <div
+          cdkDropList
+          class="flex flex-col gap-3 flex-1"
+          [id]="collection.id"
+          [cdkDropListData]="collection.prospects"
+          [cdkDropListConnectedTo]="connectedList"
+          (cdkDropListDropped)="rowsDrop($event)"
+        >
+          @for (prospect of collection.prospects; track prospect.id) {
+            <div
+              cdkDrag
+              class="flex flex-col gap-2 border p-2 bg-white hover:shadow cursor-pointer"
+              [cdkDragData]="prospect"
+            >
+              <div class="cdk-row-placeholder" *cdkDragPlaceholder></div>
+
+              <div class="flex justify-between">
+                <h5 class="font-medium w-full truncate">
+                  {{ prospect.name }}
+                </h5>
+
+                <mat-icon svgIcon="drag" class="cursor-move" cdkDragHandle></mat-icon>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <p>{{ prospect.createdAt | date:'medium' }}</p>
+
+                <app-avatar
+                  round
+                  [size]="2"
+                  [source]="prospect.owner.picture"
+                  [matTooltip]="prospect.owner.name"
+                />
+              </div>
+            </div>
+          }
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <button mat-stroked-button class="w-full">
+          Nuevo prospecto
+          <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
+        </button>
+      </div>
+    }
+    <button mat-stroked-button class="w-80">
+      Nueva columna
+      <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
+    </button>
   </div>
 </div>

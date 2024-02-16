@@ -8,7 +8,7 @@ import { MatDivider } from "@angular/material/divider";
 import { AvatarComponent } from "@components/common/avatar/avatar.component";
 import { MatTooltip } from "@angular/material/tooltip";
 import { DatePipe } from "@angular/common";
-import { Prospect } from "@/utils/types";
+import { Prospect, State } from "@/utils/types";
 
 @Component({
   selector: 'app-prospects',
@@ -20,18 +20,11 @@ import { Prospect } from "@/utils/types";
 export default class ProspectsComponent {
   public collections = dataPanelExample;
 
-  timePeriods = [
-    'Bronze age',
-    'Iron age',
-    'Middle ages',
-    'Large ages',
-  ];
-
-  public drop(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(this.timePeriods, event.previousIndex, event.currentIndex);
+  public columnsDrop(event: CdkDragDrop<State[]>): void {
+    moveItemInArray(this.collections, event.previousIndex, event.currentIndex);
   }
 
-  public prospectDrop(event: CdkDragDrop<Prospect[]>): void {
+  public rowsDrop(event: CdkDragDrop<Prospect[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -42,5 +35,9 @@ export default class ProspectsComponent {
         event.currentIndex,
       );
     }
+  }
+
+  public get connectedList(): string[] {
+    return this.collections.map(value => value.id);
   }
 }
