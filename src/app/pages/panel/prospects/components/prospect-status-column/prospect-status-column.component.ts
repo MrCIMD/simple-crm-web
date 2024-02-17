@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Prospect, State } from "@/utils/types";
 import {
   CdkDrag,
   CdkDragDrop,
@@ -12,7 +11,8 @@ import {
 import { MatButton } from "@angular/material/button";
 import { MatDivider } from "@angular/material/divider";
 import { MatIcon } from "@angular/material/icon";
-import { ProspectCardComponent } from "@/pages/panel/prospects/components/prospect-card/prospect-card.component";
+import { Prospect, State } from '@utils/types';
+import { ProspectCardComponent } from "../prospect-card/prospect-card.component";
 
 @Component({
   selector: 'app-prospect-status-column',

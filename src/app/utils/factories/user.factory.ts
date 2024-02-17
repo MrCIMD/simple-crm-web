@@ -1,4 +1,4 @@
-import { RoleEnum, User } from "@/utils/types";
+import { RoleEnum, User } from "@utils/types";
 import { faker } from "@faker-js/faker";
 
 export const factoryUser = (role: RoleEnum): User => {

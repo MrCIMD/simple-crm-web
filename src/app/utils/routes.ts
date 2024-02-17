@@ -1,6 +1,6 @@
-import { LinkType, RoleEnum } from "./types";
+import { Link, RoleEnum } from "./types";
 
-export const routes: LinkType[] = [
+export const routes: Link[] = [
   {
     route: '/home',
     icon: 'home',

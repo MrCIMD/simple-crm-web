@@ -1,4 +1,4 @@
-import { Prospect } from "@/utils/types/prospect.type";
+import { Prospect } from "@utils/types";
 
 /**
  * Define si la tarea o prospección está en proceso o finalizado

@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
-import { Interpretation, State } from "@/utils/types";
-import { createListProspects } from "@/utils/data/factories";
+import { Interpretation, State } from "@utils/types";
+import { createListProspects } from "@utils/factories";
 
 export const dataPanelExample: State[] = [
   {

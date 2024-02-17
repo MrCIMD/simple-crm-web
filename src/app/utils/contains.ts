@@ -1,6 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Project } from "@/utils/types";
-import { Visibility } from "@/utils/enums";
+import { Project, Visibility } from "@utils/types";
 
 /**
  * Datos del proyecto por predeterminado

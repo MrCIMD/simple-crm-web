@@ -1,4 +1,4 @@
-import { Project, State, User } from "@/utils/types";
+import { Project, State, User } from "@utils/types";
 
 /**
  * Define el método de contacto preferido por el prospecto

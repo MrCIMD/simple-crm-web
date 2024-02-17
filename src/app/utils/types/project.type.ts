@@ -1,4 +1,17 @@
-import { Visibility } from "@/utils/enums";
+/**
+ * Define el nivel de visibilidad
+ * */
+export enum Visibility {
+  /**
+   * Público - No se requiere permiso para visualizar o editar el contenido
+   * */
+  PUBLIC,
+  /**
+   * Privado - Se requiere permiso para visualizar o editar el contenido
+   * */
+  PRIVATE,
+}
+
 
 /**
  * Define el tipo de proyecto, dependiendo el tipo son las funciones a las que se tendrán acceso

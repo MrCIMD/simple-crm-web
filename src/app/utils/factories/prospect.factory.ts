@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { factoryUser } from "@/utils/data/factories";
+import { factoryUser } from "@utils/factories";
 import {
   Contact,
   ContactMethod,
@@ -9,7 +9,7 @@ import {
   Prospect,
   ProspectComment,
   RoleEnum
-} from "@/utils/types";
+} from "@utils/types";
 
 
 /**

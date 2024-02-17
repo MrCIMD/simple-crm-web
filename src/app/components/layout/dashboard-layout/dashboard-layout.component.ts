@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ToggleProjectComponent } from "@components/layout/toggle-project/toggle-project.component";
 import { isPlatformBrowser } from '@angular/common';
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -8,8 +8,8 @@ import { MatListModule } from "@angular/material/list";
 import { MatIcon } from "@angular/material/icon";
 import { NavigationEnd, Router, RouterModule } from "@angular/router";
 import { MediaMatcher } from "@angular/cdk/layout";
-import { LinkType } from "@/utils/types";
-import { routes } from "@/utils/routes";
+import { Link } from "@utils/types";
+import { routes } from "@utils/routes";
 import { filter } from "rxjs/operators";
 
 @Component({
@@ -20,21 +20,21 @@ import { filter } from "rxjs/operators";
   styles: ``
 })
 export class DashboardLayoutComponent implements OnInit {
+  private readonly platform: Object = inject<Object>(PLATFORM_ID);
+  private readonly router: Router = inject<Router>(Router);
+  private readonly mediaMatcher: MediaMatcher = inject<MediaMatcher>(MediaMatcher);
+  private readonly changeDetectorRef: ChangeDetectorRef = inject<ChangeDetectorRef>(ChangeDetectorRef);
+
   public mediaQueryList: MediaQueryList;
   public currentRoute: string = '';
 
   private _mediaQueryListener!: () => void;
 
-  public routes: LinkType[] = routes
+  public routes: Link[] = routes
     .filter(route => route.display)
     .sort((a, b) => a.order - b.order)
 
-  constructor(
-    private readonly mediaMatcher: MediaMatcher,
-    private readonly changeDetectorRef: ChangeDetectorRef,
-    private readonly router: Router,
-    @Inject(PLATFORM_ID) private readonly platform: Object,
-  ) {
+  constructor() {
     this.mediaQueryList = this.mediaMatcher.matchMedia('(max-width: 64rem)');
   }
 
@@ -44,7 +44,6 @@ export class DashboardLayoutComponent implements OnInit {
       // Se suscribe a los cambios del tamaño de la pantalla
       this.mediaQueryListener = () => this.changeDetectorRef.detectChanges();
       this.mediaQueryList.addEventListener('change', this.mediaQueryListener);
-
     }
     // Se suscribe a los cambios de la ruta para cambiar el nombre de la ruta actual
     this.router.events

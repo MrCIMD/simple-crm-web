@@ -1,18 +1,30 @@
-import { Injectable } from '@angular/core';
-import { State } from "@/utils/types";
-import { dataPanelExample } from "@/utils/data/panel.example";
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { catchError, Observable, throwError } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { SignalRequestState, State } from "@utils/types";
+import { dataPanelExample } from "@utils/data/panel.example";
 
 @Injectable({
   providedIn: 'root',
-  deps: [MatSnackBar]
 })
 export class ProspectsPanelService {
-  public $collections!: Observable<State[]>;
+  private readonly snackBar: MatSnackBar = inject<MatSnackBar>(MatSnackBar);
 
-  constructor(private readonly snackBar: MatSnackBar) {
-    this.$collections = this.fetchData();
+  #state = signal<SignalRequestState<State>>({
+    loading: true,
+    data: []
+  });
+
+  public collections = computed<State[]>(() => this.#state().data);
+  public loading = computed<boolean>(() => this.#state().loading);
+
+  constructor() {
+    this.fetchData().subscribe(values => {
+      this.#state.set({
+        loading: false,
+        data: values
+      })
+    });
   }
 
   public fetchData(): Observable<State[]> {
@@ -20,7 +32,7 @@ export class ProspectsPanelService {
       setTimeout(() => {
         observer.next(dataPanelExample);
         observer.complete();
-      }, 500)
+      }, 1000)
     }).pipe(catchError(err => {
       console.error('Error fetching data', err);
 
