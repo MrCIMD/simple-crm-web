@@ -26,7 +26,7 @@ export const routes: Link[] = [
     roles: [RoleEnum.DEVELOPER, RoleEnum.ADMINISTRATOR, RoleEnum.CONTRIBUTOR]
   },
   {
-    route: '/panel/prospects',
+    route: '/panel/leads',
     icon: 'account-details-outline',
     name: 'Prospectos',
     display: false,

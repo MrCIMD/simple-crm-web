@@ -16,7 +16,7 @@
       (cdkDropListDropped)="rowsDrop($event)"
     >
       @for (prospect of collection.prospects; track prospect.id) {
-        <app-prospect-card [prospect]="prospect"/>
+        <app-lead-card [prospect]="prospect"/>
       }
     </div>
 

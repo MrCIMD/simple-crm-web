@@ -50,7 +50,11 @@ export class DashboardLayoutComponent implements OnInit {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          const link = routes.find(link => event.url.includes(link.route));
+          const link = routes.find(link => {
+            const criteria = event.url === '/' ? '/home' : event.url;
+
+            return link.route.includes(criteria)
+          });
 
           if (link) {
             this.currentRoute = link.name;

@@ -7,12 +7,12 @@ import { CdkDrag, CdkDragHandle, CdkDragPlaceholder } from "@angular/cdk/drag-dr
 import { Prospect } from '@utils/types';
 
 @Component({
-  selector: 'app-prospect-card',
+  selector: 'app-lead-card',
   standalone: true,
   imports: [CdkDragHandle, CdkDragPlaceholder, MatIcon, DatePipe, MatTooltip, AvatarComponent, CdkDrag],
-  templateUrl: './prospect-card.component.html',
-  styleUrl: './prospect-card.component.scss',
+  templateUrl: './lead-card.component.html',
+  styleUrl: './lead-card.component.scss',
 })
-export class ProspectCardComponent {
+export class LeadCardComponent {
   @Input({required: true}) public prospect!: Prospect;
 }

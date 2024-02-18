@@ -1,0 +1,23 @@
+@if (!panelService.loading()) {
+  <div
+    cdkDropList
+    class="dropped-list"
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="panelService.collections()"
+    (cdkDropListDropped)="panelService.columnsDrop($event)"
+  >
+    <div class="list-content" cdkDropListGroup>
+      @for (collection of panelService.collections(); track collection.id) {
+        <app-lead-status-column [collection]="collection"/>
+      }
+      <button mat-stroked-button class="w-72">
+        Nueva columna
+        <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
+      </button>
+    </div>
+  </div>
+} @else {
+  <div class="flex items-center justify-center w-full h-[calc(100vh-9rem)]">
+    <app-lottie-loader [size]="24"/>
+  </div>
+}

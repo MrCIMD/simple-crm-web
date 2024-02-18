@@ -12,10 +12,10 @@ import { MatButton } from "@angular/material/button";
 import { MatDivider } from "@angular/material/divider";
 import { MatIcon } from "@angular/material/icon";
 import { Prospect, State } from '@utils/types';
-import { ProspectCardComponent } from "../prospect-card/prospect-card.component";
+import { LeadCardComponent } from "../lead-card/lead-card.component";
 
 @Component({
-  selector: 'app-prospect-status-column',
+  selector: 'app-lead-status-column',
   standalone: true,
   imports: [
     CdkDrag,
@@ -25,12 +25,12 @@ import { ProspectCardComponent } from "../prospect-card/prospect-card.component"
     MatButton,
     MatDivider,
     MatIcon,
-    ProspectCardComponent
+    LeadCardComponent
   ],
-  templateUrl: './prospect-status-column.component.html',
-  styleUrl: './prospect-status-column.component.scss'
+  templateUrl: './lead-status-column.component.html',
+  styleUrl: './lead-status-column.component.scss'
 })
-export class ProspectStatusColumnComponent {
+export class LeadStatusColumnComponent {
   @Input({required: true}) public collection!: State;
 
   public rowsDrop(event: CdkDragDrop<Prospect[]>): void {

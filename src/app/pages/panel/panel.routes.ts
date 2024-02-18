@@ -10,8 +10,8 @@ const PanelRoutes: Routes = [
     loadComponent: () => import('./tasks/tasks.component')
   },
   {
-    path: 'prospects',
-    loadComponent: () => import('./prospects/prospects.component')
+    path: 'leads',
+    loadComponent: () => import('./leads/leads.component')
   },
 ]
 
