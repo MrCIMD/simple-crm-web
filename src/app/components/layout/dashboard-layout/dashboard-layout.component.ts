@@ -20,10 +20,10 @@ import { filter } from "rxjs/operators";
   styles: ``
 })
 export class DashboardLayoutComponent implements OnInit {
-  private readonly platform: Object = inject<Object>(PLATFORM_ID);
-  private readonly router: Router = inject<Router>(Router);
-  private readonly mediaMatcher: MediaMatcher = inject<MediaMatcher>(MediaMatcher);
-  private readonly changeDetectorRef: ChangeDetectorRef = inject<ChangeDetectorRef>(ChangeDetectorRef);
+  private readonly _platform: Object = inject<Object>(PLATFORM_ID);
+  private readonly _router: Router = inject<Router>(Router);
+  private readonly _mediaMatcher: MediaMatcher = inject<MediaMatcher>(MediaMatcher);
+  private readonly _changeDetectorRef: ChangeDetectorRef = inject<ChangeDetectorRef>(ChangeDetectorRef);
 
   public mediaQueryList: MediaQueryList;
   public currentRoute: string = '';
@@ -35,18 +35,18 @@ export class DashboardLayoutComponent implements OnInit {
     .sort((a, b) => a.order - b.order)
 
   constructor() {
-    this.mediaQueryList = this.mediaMatcher.matchMedia('(max-width: 64rem)');
+    this.mediaQueryList = this._mediaMatcher.matchMedia('(max-width: 64rem)');
   }
 
   ngOnInit() {
     // Se ejecuta en el cliente
-    if (isPlatformBrowser(this.platform)) {
+    if (isPlatformBrowser(this._platform)) {
       // Se suscribe a los cambios del tamaño de la pantalla
-      this.mediaQueryListener = () => this.changeDetectorRef.detectChanges();
+      this.mediaQueryListener = () => this._changeDetectorRef.detectChanges();
       this.mediaQueryList.addEventListener('change', this.mediaQueryListener);
     }
     // Se suscribe a los cambios de la ruta para cambiar el nombre de la ruta actual
-    this.router.events
+    this._router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {

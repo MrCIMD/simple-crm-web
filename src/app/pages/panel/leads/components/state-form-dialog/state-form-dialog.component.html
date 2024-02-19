@@ -1,0 +1,39 @@
+<div class="flex justify-between gap-4 items-center p-2">
+  <h2 class="font-medium text-lg">Formulario</h2>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon svgIcon="close"></mat-icon>
+  </button>
+</div>
+
+<mat-divider/>
+
+<mat-dialog-content>
+  <form id="dataForm" [formGroup]="formGroup" (ngSubmit)="submit()" class="flex flex-col gap-2">
+    <mat-form-field hintLabel="Hint Label">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Placeholder" formControlName="name" required>
+      <mat-error>
+        {{ formTools.checkForErrorsIn(formGroup.controls.name) }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Hint Label">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="color" placeholder="Placeholder" formControlName="color" required>
+      <mat-error>
+        {{ formTools.checkForErrorsIn(formGroup.controls.color) }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-divider/>
+
+<mat-dialog-actions>
+  <div class="flex flex-col w-full">
+    <button mat-flat-button color="primary" form="dataForm">
+      Guardar
+      <mat-icon svgIcon="content-save"></mat-icon>
+    </button>
+  </div>
+</mat-dialog-actions>

@@ -1,4 +1,4 @@
-import { Project, State, User } from "@utils/types";
+import { LeadState, Project, User } from "@utils/types";
 
 /**
  * Define el método de contacto preferido por el prospecto
@@ -87,7 +87,7 @@ export type Prospect = {
   comments: ProspectComment[];
   officialSites: OfficialSite[];
   project?: Project;
-  state?: State;
+  state?: LeadState;
   owner: User;
   createdAt: Date;
   updatedAt: Date;

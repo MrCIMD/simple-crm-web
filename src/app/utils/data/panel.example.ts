@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
-import { Interpretation, State } from "@utils/types";
+import { Interpretation, LeadState } from "@utils/types";
 import { createListProspects } from "@utils/factories";
 
-export const dataPanelExample: State[] = [
+export const dataPanelExample: LeadState[] = [
   {
     id: faker.string.uuid(),
     name: 'Captación',

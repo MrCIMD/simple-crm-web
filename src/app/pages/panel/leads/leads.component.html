@@ -10,10 +10,12 @@
       @for (collection of panelService.collections(); track collection.id) {
         <app-lead-status-column [collection]="collection"/>
       }
-      <button mat-stroked-button class="w-72">
-        Nueva columna
-        <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
-      </button>
+      <div class="flex flex-col w-72 min-w-72">
+        <button mat-stroked-button (click)="openCreateStateDialog()">
+          Nueva columna
+          <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 } @else {

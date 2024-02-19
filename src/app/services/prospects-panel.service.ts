@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { catchError, delay, Observable, throwError } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { SignalRequestState, State } from "@utils/types";
+import { LeadState, SignalRequestState } from "@utils/types";
 import { dataPanelExample } from "@utils/data/panel.example";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
@@ -9,14 +9,14 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
   providedIn: 'root',
 })
 export class ProspectsPanelService {
-  private readonly snackBar: MatSnackBar = inject<MatSnackBar>(MatSnackBar);
+  private readonly _snackBar: MatSnackBar = inject<MatSnackBar>(MatSnackBar);
 
-  #state = signal<SignalRequestState<State>>({
+  #state = signal<SignalRequestState<LeadState>>({
     loading: true,
     data: []
   });
 
-  public collections = computed<State[]>(() => this.#state().data);
+  public collections = computed<LeadState[]>(() => this.#state().data);
 
   public loading = computed<boolean>(() => this.#state().loading);
   public wasFound = signal<boolean>(true);
@@ -29,13 +29,13 @@ export class ProspectsPanelService {
       loading: true
     }));
 
-    new Observable<State[]>(observer => {
+    new Observable<LeadState[]>(observer => {
       observer.next(dataPanelExample);
       observer.complete();
     }).pipe(delay(1500), catchError(err => {
       console.error('Error fetching data', err);
 
-      this.snackBar.open('Error fetching data. Please try again later', '', {
+      this._snackBar.open('Error fetching data. Please try again later', '', {
         horizontalPosition: 'end',
         verticalPosition: 'top'
       });
@@ -56,7 +56,7 @@ export class ProspectsPanelService {
     });
   }
 
-  public columnsDrop(event: CdkDragDrop<State[]>): void {
+  public columnsDrop(event: CdkDragDrop<LeadState[]>): void {
     const lists = this.collections();
 
     moveItemInArray(lists, event.previousIndex, event.currentIndex);

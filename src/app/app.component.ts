@@ -13,12 +13,12 @@ import { HttpClientModule } from "@angular/common/http";
   styles: ''
 })
 export class AppComponent {
-  private readonly iconRegistry: MatIconRegistry = inject<MatIconRegistry>(MatIconRegistry);
-  private readonly domSanitizer: DomSanitizer = inject<DomSanitizer>(DomSanitizer);
+  private readonly _iconRegistry: MatIconRegistry = inject<MatIconRegistry>(MatIconRegistry);
+  private readonly _domSanitizer: DomSanitizer = inject<DomSanitizer>(DomSanitizer);
 
   constructor() {
-    this.iconRegistry.addSvgIconSet(
-      this.domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg')
+    this._iconRegistry.addSvgIconSet(
+      this._domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg')
     )
   }
 }

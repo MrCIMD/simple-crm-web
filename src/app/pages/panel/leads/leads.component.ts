@@ -6,6 +6,8 @@ import { MatIcon } from "@angular/material/icon";
 import { AsyncPipe, isPlatformBrowser } from "@angular/common";
 import { ProspectsPanelService } from "@services/prospects-panel.service";
 import { LottieLoaderComponent } from "@components/lottie-loader/lottie-loader.component";
+import { MatDialog } from "@angular/material/dialog";
+import { StateFormDialogComponent } from "./components/state-form-dialog/state-form-dialog.component";
 
 @Component({
   selector: 'app-prospects',
@@ -16,13 +18,22 @@ import { LottieLoaderComponent } from "@components/lottie-loader/lottie-loader.c
   styleUrl: './leads.component.scss'
 })
 export default class LeadsComponent implements OnInit {
-  private readonly platform: Object = inject<Object>(PLATFORM_ID);
+  private readonly _platform: Object = inject<Object>(PLATFORM_ID);
+  private readonly _dialog: MatDialog = inject<MatDialog>(MatDialog);
 
   public readonly panelService: ProspectsPanelService = inject<ProspectsPanelService>(ProspectsPanelService);
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platform)) {
+    if (isPlatformBrowser(this._platform)) {
       this.panelService.fetchData();
     }
+  }
+
+  public openCreateStateDialog() {
+    this._dialog.open(StateFormDialogComponent, {
+      width: '90vw',
+      maxWidth: '32rem',
+      autoFocus: false,
+    });
   }
 }

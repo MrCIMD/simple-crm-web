@@ -1,5 +1,5 @@
 <div cdkDrag [cdkDragData]="collection" [id]="collection.id">
-  <div class="draggable-box">
+  <div class="draggable-box" [style.border-top-color]="collection.color">
     <div class="flex justify-between items-center">
       <h5 class="font-medium text-lg">{{ collection.name }}</h5>
       <mat-icon svgIcon="drag" cdkDragHandle></mat-icon>
@@ -9,10 +9,9 @@
 
     <div
       cdkDropList
-      class="flex flex-col gap-3 flex-1 pr-1 overflow-y-scroll"
+      class="flex flex-col gap-2 flex-1 overflow-y-scroll"
       [id]="collection.id"
       [cdkDropListData]="collection.prospects"
-      [cdkDropListConnectedTo]="connectedList"
       (cdkDropListDropped)="rowsDrop($event)"
     >
       @for (prospect of collection.prospects; track prospect.id) {
@@ -22,7 +21,7 @@
 
     <mat-divider></mat-divider>
 
-    <button mat-stroked-button class="w-full">
+    <button mat-stroked-button>
       Nuevo prospecto
       <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
     </button>
