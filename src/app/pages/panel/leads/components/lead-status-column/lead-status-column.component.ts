@@ -18,6 +18,7 @@ import { Lead, LeadState } from '@utils/types';
 import { LeadCardComponent } from "../lead-card/lead-card.component";
 import { StateFormDialogComponent } from "../state-form-dialog/state-form-dialog.component";
 import { StateDeleteDialogComponent } from "../state-delete-dialog/state-delete-dialog.component";
+import { LeadFormData, LeadFormDialogComponent } from "../lead-form-dialog/lead-form-dialog.component";
 
 @Component({
   selector: 'app-lead-status-column',
@@ -42,7 +43,7 @@ import { StateDeleteDialogComponent } from "../state-delete-dialog/state-delete-
 export class LeadStatusColumnComponent {
   private readonly _dialog: MatDialog = inject<MatDialog>(MatDialog)
 
-  @Input({required: true}) public collection!: LeadState;
+  @Input({required: true}) public state!: LeadState;
 
   public rowsDrop(event: CdkDragDrop<Lead[]>): void {
     if (event.previousContainer === event.container) {
@@ -62,7 +63,7 @@ export class LeadStatusColumnComponent {
       width: '90vw',
       maxWidth: '32rem',
       autoFocus: false,
-      data: this.collection
+      data: this.state
     });
   }
 
@@ -71,7 +72,27 @@ export class LeadStatusColumnComponent {
       width: '90vw',
       maxWidth: '32rem',
       autoFocus: false,
-      data: this.collection
+      data: this.state
     });
+  }
+
+  public openCreateLeadDialog() {
+    const data: LeadFormData = {
+      state: {
+        ...this.state,
+        prospects: []
+      }
+    };
+
+    this._dialog.open(LeadFormDialogComponent, {
+      width: '90vw',
+      maxWidth: '64rem',
+      autoFocus: false,
+      data
+    });
+  }
+
+  public get disabledDelete(): boolean {
+    return !!this.state.prospects.length
   }
 }

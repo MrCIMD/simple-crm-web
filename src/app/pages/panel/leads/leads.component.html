@@ -7,8 +7,8 @@
     (cdkDropListDropped)="panelService.columnsDrop($event)"
   >
     <div class="list-content" cdkDropListGroup>
-      @for (collection of panelService.collections(); track collection.id) {
-        <app-lead-status-column [collection]="collection"/>
+      @for (state of panelService.collections(); track state.id) {
+        <app-lead-status-column [state]="state" />
       }
       <div class="flex flex-col w-72 min-w-72">
         <button mat-stroked-button (click)="openCreateStateDialog()">

@@ -1,8 +1,8 @@
-<div cdkDrag [cdkDragData]="collection" [id]="collection.id">
-  <div class="draggable-box" [style.border-top-color]="collection.color">
+<div cdkDrag [cdkDragData]="state" [id]="state.id">
+  <div class="draggable-box" [style.border-top-color]="state.color">
     <div class="flex justify-between items-center">
       <mat-icon svgIcon="drag" cdkDragHandle class="cursor-move"></mat-icon>
-      <h5 class="font-medium text-lg">{{ collection.name }}</h5>
+      <h5 class="font-medium text-lg">{{ state.name }}</h5>
       <span class="ml-auto"></span>
       <mat-icon svgIcon="dots-vertical" [matMenuTriggerFor]="menu"></mat-icon>
 
@@ -11,7 +11,7 @@
           <mat-icon svgIcon="pencil"></mat-icon>
           <span>Editar</span>
         </button>
-        <button mat-menu-item (click)="openDeleteStateDialog()">
+        <button mat-menu-item (click)="openDeleteStateDialog()" [disabled]="disabledDelete">
           <mat-icon svgIcon="delete"></mat-icon>
           <span>Eliminar</span>
         </button>
@@ -23,18 +23,18 @@
     <div
       cdkDropList
       class="flex flex-col gap-2 flex-1 overflow-y-scroll"
-      [id]="collection.id"
-      [cdkDropListData]="collection.prospects"
+      [id]="state.id"
+      [cdkDropListData]="state.prospects"
       (cdkDropListDropped)="rowsDrop($event)"
     >
-      @for (prospect of collection.prospects; track prospect.id) {
-        <app-lead-card [prospect]="prospect"/>
+      @for (lead of state.prospects; track lead.id) {
+        <app-lead-card [lead]="lead" [state]="state" />
       }
     </div>
 
     <mat-divider></mat-divider>
 
-    <button mat-stroked-button>
+    <button mat-stroked-button (click)="openCreateLeadDialog()">
       Nuevo prospecto
       <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
     </button>

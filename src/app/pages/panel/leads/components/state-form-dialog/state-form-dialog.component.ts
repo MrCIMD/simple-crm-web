@@ -11,7 +11,7 @@ import { MatButton, MatIconButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { MatDivider } from "@angular/material/divider";
 import { ReactiveFormsModule, Validators } from "@angular/forms";
-import { Interpretation, LeadState, LeadStateForm } from "@utils/types";
+import { Interpretation, LeadState } from "@utils/types";
 import { MatError, MatFormField, MatLabel } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
 import { JsonPipe } from "@angular/common";
@@ -49,7 +49,7 @@ export class StateFormDialogComponent implements OnInit {
   public readonly formTools: FormToolsService = inject<FormToolsService>(FormToolsService);
   public readonly dialogData?: LeadState = inject<LeadState>(MAT_DIALOG_DATA);
 
-  public formGroup: LeadStateForm = this.formTools.builder.group({
+  public formGroup = this.formTools.builder.group({
     name: ['', [Validators.required]],
     color: ['#9c27b0', [Validators.required]],
     interpretation: [Interpretation.TODO, [Validators.required]],

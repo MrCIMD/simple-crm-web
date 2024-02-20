@@ -1,21 +1,21 @@
-<div cdkDrag [cdkDragData]="prospect">
-  <div class="flex flex-col gap-2 border p-2 bg-white hover:shadow cursor-pointer">
+<div cdkDrag [cdkDragData]="lead">
+  <div class="flex flex-col gap-2 border p-2 bg-white hover:shadow cursor-pointer" (click)="openTrackingLeadDialog()">
     <div class="flex justify-between">
       <h5 class="font-medium w-full truncate">
-        {{ prospect.name }}
+        {{ lead.name }}
       </h5>
 
       <mat-icon svgIcon="drag" class="cursor-move" cdkDragHandle></mat-icon>
     </div>
 
     <div class="flex justify-between items-center">
-      <p>{{ prospect.createdAt | date:'medium' }}</p>
+      <p>{{ lead.createdAt | date:'medium' }}</p>
 
       <app-avatar
         round
         [size]="2"
-        [source]="prospect.owner.picture"
-        [matTooltip]="prospect.owner.name"
+        [source]="lead.owner.picture"
+        [matTooltip]="lead.owner.name"
       />
     </div>
   </div>

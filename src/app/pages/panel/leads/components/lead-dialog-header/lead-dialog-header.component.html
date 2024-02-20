@@ -1,0 +1,23 @@
+<div class="flex justify-between gap-4 items-center py-2 px-5">
+  @if (lead?.owner) {
+    <app-avatar round [size]="2" [source]="lead?.owner!.picture" [matTooltip]="lead?.owner!.name"/>
+  }
+
+  <h2 class="font-medium text-xl border-b-2" [style.border-bottom-color]="state.color">
+    {{ !!lead?.name ? lead?.name : 'Nuevo prospecto' }}
+  </h2>
+
+  <span class="ml-auto"></span>
+
+  <button mat-icon-button (click)="openQuotation($event)" disabled>
+    <mat-icon svgIcon="file-document"></mat-icon>
+  </button>
+
+  <button mat-icon-button (click)="openCalendar($event)" disabled>
+    <mat-icon svgIcon="calendar"></mat-icon>
+  </button>
+
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon svgIcon="close"></mat-icon>
+  </button>
+</div>

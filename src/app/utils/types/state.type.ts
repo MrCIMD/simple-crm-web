@@ -36,9 +36,3 @@ export type LeadState = {
 }
 
 export type LeadStateFormValues = Pick<LeadState, 'name' | 'color' | 'interpretation'>
-
-export type LeadStateForm = FormGroup<{
-  name: FormControl<string | null>;
-  color: FormControl<string | null>;
-  interpretation: FormControl<Interpretation | null>;
-}>;

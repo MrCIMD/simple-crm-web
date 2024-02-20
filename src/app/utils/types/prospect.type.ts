@@ -1,4 +1,5 @@
-import { LeadState, Project, User } from "@utils/types";
+import { Interpretation, LeadState, Project, User } from "@utils/types";
+import { FormControl, FormGroup } from "@angular/forms";
 /**
  * Define el método de contacto preferido por el prospecto
  * */
@@ -84,11 +85,16 @@ export type Lead = {
   numberStudents: number;
   location: string[];
   contacts: Contact[];
-  comments: LeadComment[];
   officialSites: OfficialSite[];
+  comments: LeadComment[];
   project?: Project;
   state?: LeadState;
   owner: User;
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type LeadForm = FormGroup<{
+  name: FormControl<string | null>;
+  numberStudents: FormControl<number | null>;
+}>;

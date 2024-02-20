@@ -1,6 +1,6 @@
 <div class="flex justify-between gap-4 items-center py-2 px-5">
   <h2 class="font-medium text-xl">
-    Eliminar columna
+    Eliminar {{dialogData?.name}}
   </h2>
   <button mat-icon-button mat-dialog-close>
     <mat-icon svgIcon="close"></mat-icon>
@@ -10,11 +10,14 @@
 <mat-divider/>
 
 <mat-dialog-content>
+  @if (dialogData?.id) {
+    <p>¿Estás seguro de que deseas eliminar este registro?</p>
+  }
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <div class="flex flex-col w-full">
-    <button mat-flat-button color="warn">
+    <button mat-flat-button color="warn" (click)="delete()">
       Eliminar
       <mat-icon svgIcon="delete"></mat-icon>
     </button>

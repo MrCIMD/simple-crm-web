@@ -1,1 +1,84 @@
-<p>lead-form-dialog works!</p>
+<app-lead-dialog-header
+  [lead]="dialogData.lead"
+  [state]="dialogData!.state"
+/>
+
+<mat-divider/>
+
+<mat-dialog-content>
+  <form id="dataForm" [formGroup]="formGroup" (ngSubmit)="submit()" class="flex gap-2">
+    <div class="w-full flex flex-col gap-2">
+      <h3 class="font-bold">Prospecto</h3>
+
+      <mat-form-field hintLabel="Nombre del prospecto">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" formControlName="name" required>
+        <mat-error>
+          {{ formTools.checkForErrorsIn(formGroup.controls.name) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Cantidad de estudiantes">
+        <mat-label>Matriculación</mat-label>
+        <input matInput type="number" formControlName="numberStudents" required>
+        <mat-error>
+          {{ formTools.checkForErrorsIn(formGroup.controls.numberStudents) }}
+        </mat-error>
+      </mat-form-field>
+
+      <h3 class="font-bold">Comentarios</h3>
+
+      <div>
+
+      </div>
+    </div>
+    <div class="w-full flex flex-col gap-2">
+      <h3 class="font-bold">Contactos</h3>
+      <div formArrayName="contacts">
+        @for (contact of formContacts().controls; track contactIndex; let contactIndex = $index) {
+          <div [formGroupName]="contactIndex" class="flex flex-col gap-2">
+            <mat-form-field hintLabel="Nombre del prospecto">
+              <mat-label>Nombre</mat-label>
+              <input matInput type="text" formControlName="name" required>
+              <mat-error>
+                {{ formTools.checkForErrorsIn(contact) }}
+              </mat-error>
+            </mat-form-field>
+
+            <div formArrayName="methods">
+              @for (method of formMethods(contactIndex).controls; track methodIndex; let methodIndex = $index) {
+                <div [formGroupName]="methodIndex" class="flex flex-col gap-2">
+                  <mat-form-field hintLabel="Informacion de contacto">
+                    <mat-label>Contacto</mat-label>
+                    <input matInput type="text" formControlName="value" required>
+
+                    <mat-error>
+                      {{ formTools.checkForErrorsIn(method) }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              }
+            </div>
+          </div>
+        }
+        <button mat-stroked-button (click)="addContactForm()">
+          Agregar contacto
+          <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
+        </button>
+      </div>
+      <h3 class="font-bold">Sitios oficiales</h3>
+      <div>
+
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="flex flex-col w-full">
+    <button mat-flat-button color="primary" form="dataForm">
+      Guardar
+      <mat-icon svgIcon="content-save"></mat-icon>
+    </button>
+  </div>
+</mat-dialog-actions>

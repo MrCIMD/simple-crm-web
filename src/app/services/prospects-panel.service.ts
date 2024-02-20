@@ -30,9 +30,20 @@ export class ProspectsPanelService {
     }));
 
     new Observable<LeadState[]>(observer => {
-      observer.next(dataPanelExample);
+      const payload = dataPanelExample.map(leadState => {
+        leadState.prospects = leadState.prospects.map(lead => {
+          lead.state = {
+            ...leadState,
+            prospects: []
+          }
+          return lead;
+        });
+        return leadState;
+      });
+
+      observer.next(payload);
       observer.complete();
-    }).pipe(delay(1500), catchError(err => {
+    }).pipe(delay(1000), catchError(err => {
       console.error('Error fetching data', err);
 
       this._snackBar.open('Error fetching data. Please try again later', '', {
@@ -84,6 +95,15 @@ export class ProspectsPanelService {
       return {
         ...previous,
         data: [...previous.data, payload]
+      };
+    })
+  }
+
+  public deleteStateColumn(id: string) {
+    this.#state.update(previous => {
+      return {
+        ...previous,
+        data: previous.data.filter(value => value.id !== id)
       };
     })
   }
