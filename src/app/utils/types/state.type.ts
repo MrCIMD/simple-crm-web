@@ -1,4 +1,4 @@
-import { Prospect } from "@utils/types";
+import { Lead } from "@utils/types";
 import { FormControl, FormGroup } from "@angular/forms";
 
 /**
@@ -6,13 +6,21 @@ import { FormControl, FormGroup } from "@angular/forms";
  * */
 export enum Interpretation {
   /**
-   * Finalizado - Indica que cumplió el proceso establecido y está finalizado
+   * Por hacer - Clasifica un estado pendiente o en progreso
    * */
-  FINISHED,
+  TODO,
   /**
-   * En proceso - Indica que cumplió el proceso establecido y está finalizado
+   * Hecho - Clasifica un estado como realizado
    * */
-  IN_PROCESS,
+  DONE,
+  /**
+   * Rechazado - Clasifica un estado como rechazado
+   * */
+  REJECT,
+  /**
+   * Archivado - Clasifica a un estado como archivado
+   * */
+  ARCHIVED
 }
 
 /**
@@ -24,8 +32,10 @@ export type LeadState = {
   color: string;
   positionIndex: number;
   interpretation: Interpretation;
-  prospects: Prospect[];
+  prospects: Lead[];
 }
+
+export type LeadStateFormValues = Pick<LeadState, 'name' | 'color' | 'interpretation'>
 
 export type LeadStateForm = FormGroup<{
   name: FormControl<string | null>;

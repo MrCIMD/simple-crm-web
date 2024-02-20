@@ -1,8 +1,21 @@
 <div cdkDrag [cdkDragData]="collection" [id]="collection.id">
   <div class="draggable-box" [style.border-top-color]="collection.color">
     <div class="flex justify-between items-center">
+      <mat-icon svgIcon="drag" cdkDragHandle class="cursor-move"></mat-icon>
       <h5 class="font-medium text-lg">{{ collection.name }}</h5>
-      <mat-icon svgIcon="drag" cdkDragHandle></mat-icon>
+      <span class="ml-auto"></span>
+      <mat-icon svgIcon="dots-vertical" [matMenuTriggerFor]="menu"></mat-icon>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openUpdateStateDialog()">
+          <mat-icon svgIcon="pencil"></mat-icon>
+          <span>Editar</span>
+        </button>
+        <button mat-menu-item (click)="openDeleteStateDialog()">
+          <mat-icon svgIcon="delete"></mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
     </div>
 
     <mat-divider></mat-divider>

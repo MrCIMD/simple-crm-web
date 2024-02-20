@@ -13,7 +13,6 @@ import { StateFormDialogComponent } from "./components/state-form-dialog/state-f
   selector: 'app-prospects',
   standalone: true,
   imports: [CdkDropList, CdkDropListGroup, MatButton, MatIcon, AsyncPipe, LeadStatusColumnComponent, LottieLoaderComponent],
-  providers: [ProspectsPanelService],
   templateUrl: './leads.component.html',
   styleUrl: './leads.component.scss'
 })

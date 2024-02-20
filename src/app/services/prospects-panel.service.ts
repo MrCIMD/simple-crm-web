@@ -1,9 +1,10 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { catchError, delay, Observable, throwError } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { LeadState, SignalRequestState } from "@utils/types";
+import { LeadState, LeadStateFormValues, SignalRequestState } from "@utils/types";
 import { dataPanelExample } from "@utils/data/panel.example";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { faker } from "@faker-js/faker";
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,6 @@ export class ProspectsPanelService {
   });
 
   public collections = computed<LeadState[]>(() => this.#state().data);
-
   public loading = computed<boolean>(() => this.#state().loading);
   public wasFound = signal<boolean>(true);
 
@@ -66,5 +66,25 @@ export class ProspectsPanelService {
 
       return previous;
     });
+  }
+
+  public createStateColumn(values: LeadStateFormValues) {
+    const {name, color, interpretation} = values;
+
+    this.#state.update(previous => {
+      const positionIndex = previous.data.length;
+
+      const payload: LeadState = {
+        id: faker.string.uuid(),
+        name, color, interpretation,
+        positionIndex,
+        prospects: [],
+      };
+
+      return {
+        ...previous,
+        data: [...previous.data, payload]
+      };
+    })
   }
 }

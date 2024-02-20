@@ -4,10 +4,10 @@ import {
   Contact,
   ContactMethod,
   HowContact,
+  Lead,
+  LeadComment,
   OfficialMedia,
   OfficialSite,
-  Prospect,
-  ProspectComment,
   RoleEnum
 } from "@utils/types";
 
@@ -17,11 +17,11 @@ import {
  * @param length - Longitud del arreglo
  * @returns Arreglo de prospectos
  * */
-export const createListProspects = (length: number): Prospect[] => {
-  return Array.from({length}).map(() => prospectFactory())
+export const createListLeads = (length: number): Lead[] => {
+  return Array.from({length}).map(() => leadFactory())
 }
 
-export const prospectFactory = (): Prospect => {
+export const leadFactory = (): Lead => {
   const id = faker.string.uuid();
   const name = faker.company.name();
   const createdAt = faker.date.past({refDate: '14-02-2024'});
@@ -40,12 +40,15 @@ export const prospectFactory = (): Prospect => {
   const officialSites = createListOfficialSites(numbersOfficialSite);
 
   const numbersProspectComment = Math.floor(Math.random() * 6) + 1; // 1 - 6
-  const comments = createListProspectComments(numbersProspectComment);
+  const comments = createListLeadComments(numbersProspectComment);
+
+  const numberStudents = Math.floor(Math.random() * 200) + 50; // 1 - 6
 
   return {
     id,
     name,
     owner,
+    numberStudents,
     officialSites,
     contacts,
     comments,
@@ -59,7 +62,7 @@ export const prospectFactory = (): Prospect => {
  * Crea un comentario
  * @returns Comentario
  * */
-export const factoryProspectComment = (): ProspectComment => {
+export const factoryLeadComment = (): LeadComment => {
   const owner = factoryUser(RoleEnum.CONTRIBUTOR);
   const comment = faker.lorem.sentence(10);
   const timestamp = faker.date.past({refDate: '15-02-2024'});
@@ -76,8 +79,8 @@ export const factoryProspectComment = (): ProspectComment => {
  * @param length - Longitud del arreglo
  * @returns Arreglo de comentarios
  * */
-export const createListProspectComments = (length: number): ProspectComment[] => {
-  return Array.from({length}).map(() => factoryProspectComment())
+export const createListLeadComments = (length: number): LeadComment[] => {
+  return Array.from({length}).map(() => factoryLeadComment())
 }
 
 /**

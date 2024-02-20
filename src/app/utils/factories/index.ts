@@ -1,2 +1,2 @@
 export * from './user.factory';
-export * from './prospect.factory';
+export * from './lead.factory';

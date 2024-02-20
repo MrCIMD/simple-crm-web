@@ -4,7 +4,7 @@ import { MatTooltip } from "@angular/material/tooltip";
 import { MatIcon } from "@angular/material/icon";
 import { DatePipe } from "@angular/common";
 import { CdkDrag, CdkDragHandle, CdkDragPlaceholder } from "@angular/cdk/drag-drop";
-import { Prospect } from '@utils/types';
+import { Lead } from '@utils/types';
 
 @Component({
   selector: 'app-lead-card',
@@ -14,5 +14,5 @@ import { Prospect } from '@utils/types';
   styleUrl: './lead-card.component.scss',
 })
 export class LeadCardComponent {
-  @Input({required: true}) public prospect!: Prospect;
+  @Input({required: true}) public prospect!: Lead;
 }

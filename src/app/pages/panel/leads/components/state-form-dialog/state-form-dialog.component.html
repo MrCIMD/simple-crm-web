@@ -1,5 +1,7 @@
-<div class="flex justify-between gap-4 items-center p-2">
-  <h2 class="font-medium text-lg">Formulario</h2>
+<div class="flex justify-between gap-4 items-center py-2 px-5">
+  <h2 class="font-medium text-xl">
+    {{ !!dialogData?.id ? 'Actualizar' : 'Nuevo' }} columna
+  </h2>
   <button mat-icon-button mat-dialog-close>
     <mat-icon svgIcon="close"></mat-icon>
   </button>
@@ -9,21 +11,33 @@
 
 <mat-dialog-content>
   <form id="dataForm" [formGroup]="formGroup" (ngSubmit)="submit()" class="flex flex-col gap-2">
-    <mat-form-field hintLabel="Hint Label">
+    <mat-form-field hintLabel="Nombre del estado">
       <mat-label>Nombre</mat-label>
-      <input matInput placeholder="Placeholder" formControlName="name" required>
+      <input matInput type="text" formControlName="name" required>
       <mat-error>
         {{ formTools.checkForErrorsIn(formGroup.controls.name) }}
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field hintLabel="Hint Label">
-      <mat-label>Nombre</mat-label>
-      <input matInput type="color" placeholder="Placeholder" formControlName="color" required>
+    <mat-form-field hintLabel="Color del estado">
+      <mat-label>Color</mat-label>
+      <input matInput type="color" formControlName="color" required>
       <mat-error>
         {{ formTools.checkForErrorsIn(formGroup.controls.color) }}
       </mat-error>
     </mat-form-field>
+
+    <mat-radio-group formControlName="interpretation" color="primary">
+      @for (option of interpretations; track option.value) {
+        <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
+      }
+    </mat-radio-group>
+
+    @if (formGroup.get('interpretation')?.invalid) {
+      <mat-error>
+        {{ formTools.checkForErrorsIn(formGroup.controls.interpretation) }}
+      </mat-error>
+    }
   </form>
 </mat-dialog-content>
 

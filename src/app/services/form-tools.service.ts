@@ -31,11 +31,19 @@ export class FormToolsService {
     }
 
     if (control.hasError('min')) {
-      return 'Value must be between 1980 and 2020';
+      const error = control.getError('min');
+
+      return ERROR_MESSAGES['min'](`${error['min']}`);
     }
 
-    if (control.hasError('min')) {
-      return 'Value must be between 1980 and 2020';
+    if (control.hasError('max')) {
+      const error = control.getError('max');
+
+      return ERROR_MESSAGES['max'](`${error['max']}`);
+    }
+
+    if (control.hasError('email')) {
+      return ERROR_MESSAGES['email']();
     }
 
     return ''

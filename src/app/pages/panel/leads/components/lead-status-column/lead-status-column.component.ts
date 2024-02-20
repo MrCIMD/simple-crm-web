@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -8,12 +8,16 @@ import {
   moveItemInArray,
   transferArrayItem
 } from "@angular/cdk/drag-drop";
-import { MatButton } from "@angular/material/button";
+import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
 import { MatDivider } from "@angular/material/divider";
+import { MatButton } from "@angular/material/button";
+import { MatDialog } from "@angular/material/dialog";
 import { MatIcon } from "@angular/material/icon";
-import { LeadState, Prospect } from '@utils/types';
-import { LeadCardComponent } from "../lead-card/lead-card.component";
 import { NgStyle } from "@angular/common";
+import { Lead, LeadState } from '@utils/types';
+import { LeadCardComponent } from "../lead-card/lead-card.component";
+import { StateFormDialogComponent } from "../state-form-dialog/state-form-dialog.component";
+import { StateDeleteDialogComponent } from "../state-delete-dialog/state-delete-dialog.component";
 
 @Component({
   selector: 'app-lead-status-column',
@@ -27,15 +31,20 @@ import { NgStyle } from "@angular/common";
     MatDivider,
     MatIcon,
     LeadCardComponent,
-    NgStyle
+    NgStyle,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger
   ],
   templateUrl: './lead-status-column.component.html',
   styleUrl: './lead-status-column.component.scss'
 })
 export class LeadStatusColumnComponent {
+  private readonly _dialog: MatDialog = inject<MatDialog>(MatDialog)
+
   @Input({required: true}) public collection!: LeadState;
 
-  public rowsDrop(event: CdkDragDrop<Prospect[]>): void {
+  public rowsDrop(event: CdkDragDrop<Lead[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -48,7 +57,21 @@ export class LeadStatusColumnComponent {
     }
   }
 
-  public get bgDropzone(): string {
-    return `${this.collection.color}50`
+  public openUpdateStateDialog() {
+    this._dialog.open(StateFormDialogComponent, {
+      width: '90vw',
+      maxWidth: '32rem',
+      autoFocus: false,
+      data: this.collection
+    });
+  }
+
+  public openDeleteStateDialog() {
+    this._dialog.open(StateDeleteDialogComponent, {
+      width: '90vw',
+      maxWidth: '32rem',
+      autoFocus: false,
+      data: this.collection
+    });
   }
 }

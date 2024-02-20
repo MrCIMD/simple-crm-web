@@ -6,6 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { provideLottieOptions } from "ngx-lottie";
 import player from 'lottie-web';
+import { ProspectsPanelService } from "@services/prospects-panel.service";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideLottieOptions({
       player: () => player
     }),
+    {provide: ProspectsPanelService}
   ]
 };
