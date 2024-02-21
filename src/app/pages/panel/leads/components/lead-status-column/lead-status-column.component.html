@@ -4,7 +4,7 @@
       <mat-icon svgIcon="drag" cdkDragHandle class="cursor-move"></mat-icon>
       <h5 class="font-medium text-lg">{{ state.name }}</h5>
       <span class="ml-auto"></span>
-      <mat-icon svgIcon="dots-vertical" [matMenuTriggerFor]="menu"></mat-icon>
+      <mat-icon svgIcon="dots-vertical" [matMenuTriggerFor]="menu" class="text-gray-500"></mat-icon>
 
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="openUpdateStateDialog()">

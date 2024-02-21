@@ -86,7 +86,7 @@ export class LeadStatusColumnComponent {
 
     this._dialog.open(LeadFormDialogComponent, {
       width: '90vw',
-      maxWidth: '64rem',
+      maxWidth: '48rem',
       autoFocus: false,
       data
     });

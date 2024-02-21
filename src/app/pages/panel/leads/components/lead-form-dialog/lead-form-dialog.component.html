@@ -6,71 +6,143 @@
 <mat-divider/>
 
 <mat-dialog-content>
-  <form id="dataForm" [formGroup]="formGroup" (ngSubmit)="submit()" class="flex gap-2">
-    <div class="w-full flex flex-col gap-2">
-      <h3 class="font-bold">Prospecto</h3>
+  <form id="dataForm" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <mat-tab-group dynamicHeight>
+      <!--   Información principal   -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon svgIcon="information"></mat-icon>
+          Información
+        </ng-template>
 
-      <mat-form-field hintLabel="Nombre del prospecto">
-        <mat-label>Nombre</mat-label>
-        <input matInput type="text" formControlName="name" required>
-        <mat-error>
-          {{ formTools.checkForErrorsIn(formGroup.controls.name) }}
-        </mat-error>
-      </mat-form-field>
+        <div class="flex flex-col gap-2 mt-2">
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" formControlName="name" required>
+            <mat-error>
+              {{ formTools.checkForErrorsIn(formGroup.controls.name) }}
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field hintLabel="Cantidad de estudiantes">
-        <mat-label>Matriculación</mat-label>
-        <input matInput type="number" formControlName="numberStudents" required>
-        <mat-error>
-          {{ formTools.checkForErrorsIn(formGroup.controls.numberStudents) }}
-        </mat-error>
-      </mat-form-field>
+          <mat-form-field>
+            <mat-label>Matriculación</mat-label>
+            <input matInput type="number" formControlName="numberStudents" required>
+            <mat-error>
+              {{ formTools.checkForErrorsIn(formGroup.controls.numberStudents) }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+      <!--   Directorio   -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon svgIcon="notebook"></mat-icon>
+          Directorio
+        </ng-template>
 
-      <h3 class="font-bold">Comentarios</h3>
+        <div class="flex flex-col gap-2 mt-2">
+          <div formArrayName="contacts">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="font-medium text-lg">Contactos</h3>
 
-      <div>
-
-      </div>
-    </div>
-    <div class="w-full flex flex-col gap-2">
-      <h3 class="font-bold">Contactos</h3>
-      <div formArrayName="contacts">
-        @for (contact of formContacts().controls; track contactIndex; let contactIndex = $index) {
-          <div [formGroupName]="contactIndex" class="flex flex-col gap-2">
-            <mat-form-field hintLabel="Nombre del prospecto">
-              <mat-label>Nombre</mat-label>
-              <input matInput type="text" formControlName="name" required>
-              <mat-error>
-                {{ formTools.checkForErrorsIn(contact) }}
-              </mat-error>
-            </mat-form-field>
-
-            <div formArrayName="methods">
-              @for (method of formMethods(contactIndex).controls; track methodIndex; let methodIndex = $index) {
-                <div [formGroupName]="methodIndex" class="flex flex-col gap-2">
-                  <mat-form-field hintLabel="Informacion de contacto">
-                    <mat-label>Contacto</mat-label>
-                    <input matInput type="text" formControlName="value" required>
-
-                    <mat-error>
-                      {{ formTools.checkForErrorsIn(method) }}
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              }
+              <button mat-icon-button matTooltip="Nuevo contacto" (click)="addContactForm()">
+                <mat-icon svgIcon="plus"></mat-icon>
+              </button>
             </div>
-          </div>
-        }
-        <button mat-stroked-button (click)="addContactForm()">
-          Agregar contacto
-          <mat-icon svgIcon="plus" iconPositionEnd></mat-icon>
-        </button>
-      </div>
-      <h3 class="font-bold">Sitios oficiales</h3>
-      <div>
 
-      </div>
-    </div>
+            @for (contact of formContacts().controls; track contactIndex; let contactIndex = $index) {
+              <div [formGroupName]="contactIndex" class="flex flex-col gap-2">
+                <div class="flex justify-between items-center gap-2">
+                  <h3 class="font-medium">Contacto #{{ contactIndex + 1 }}</h3>
+
+                  <button
+                    mat-icon-button
+                    matTooltip="Eliminar contacto"
+                    color="warn"
+                    (click)="removeContactFormGroup(contactIndex)"
+                  >
+                    <mat-icon svgIcon="delete"></mat-icon>
+                  </button>
+                </div>
+
+                <mat-form-field>
+                  <mat-label>Nombre</mat-label>
+                  <input matInput type="text" formControlName="name" required>
+                  <mat-error>
+                    {{ formTools.checkForErrorsIn(contact.get('name')) }}
+                  </mat-error>
+                </mat-form-field>
+
+                <div formArrayName="methods" class="flex flex-col gap-2">
+                  <div class="flex items-center justify-between gap-2">
+                    <h3 class="font-medium text-lg">Métodos de contacto</h3>
+
+                    <button mat-icon-button matTooltip="Nuevo contacto" (click)="addOfficialSiteForm(contactIndex)">
+                      <mat-icon svgIcon="plus"></mat-icon>
+                    </button>
+                  </div>
+
+                  @for (method of formMethods(contactIndex).controls; track methodIndex; let methodIndex = $index) {
+                    <div class="flex justify-between items-center gap-2">
+                      <h3 class="font-medium">Método de contacto #{{ methodIndex + 1 }}</h3>
+
+                      @if (methodIndex !== 0) {
+                        <mat-icon
+                          svgIcon="delete"
+                          class="text-red-500"
+                          (click)="removeMethodFormGroup(contactIndex, methodIndex)"
+                        ></mat-icon>
+                      }
+                    </div>
+
+                    <div [formGroupName]="methodIndex" class="flex flex-col gap-2">
+                      <div class="flex gap-2">
+                        <mat-form-field class="w-full">
+                          <mat-label>Tipo</mat-label>
+                          <mat-select formControlName="type">
+                            <mat-option [value]="0">
+                              <mat-icon svgIcon="whatsapp"></mat-icon>
+                              WhatsApp
+                            </mat-option>
+                            <mat-option [value]="1">
+                              <mat-icon svgIcon="phone"></mat-icon>
+                              Teléfono
+                            </mat-option>
+                            <mat-option [value]="2">
+                              <mat-icon svgIcon="at"></mat-icon>
+                              Mail
+                            </mat-option>
+                          </mat-select>
+                          <mat-error>
+                            {{ formTools.checkForErrorsIn(method.get('type')) }}
+                          </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="w-full">
+                          <mat-label>Contacto</mat-label>
+                          <input matInput type="text" formControlName="value" required>
+                          <mat-error>
+                            {{ formTools.checkForErrorsIn(method.get('value')) }}
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </mat-tab>
+      <!--   Información principal   -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon svgIcon="link"></mat-icon>
+          Sitios
+        </ng-template>
+
+        Content 3
+      </mat-tab>
+    </mat-tab-group>
   </form>
 </mat-dialog-content>
 

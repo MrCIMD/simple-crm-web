@@ -1,15 +1,36 @@
 <div cdkDrag [cdkDragData]="lead">
-  <div class="flex flex-col gap-2 border p-2 bg-white hover:shadow cursor-pointer" (click)="openTrackingLeadDialog()">
-    <div class="flex justify-between">
-      <h5 class="font-medium w-full truncate">
-        {{ lead.name }}
-      </h5>
-
-      <mat-icon svgIcon="drag" class="cursor-move" cdkDragHandle></mat-icon>
+  <div class="flex flex-col gap-2 p-3 shadow bg-white border-2">
+    <div class="flex justify-between items-center gap-2">
+      <mat-icon svgIcon="drag" cdkDragHandle class="cursor-move text-gray-500"></mat-icon>
+      <span class="ml-auto"></span>
+      <mat-icon svgIcon="dots-vertical" [matMenuTriggerFor]="menu" class="text-gray-500"></mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openTrackingLeadDialog()">
+          <mat-icon svgIcon="timeline"></mat-icon>
+          <span>Seguimiento</span>
+        </button>
+        <button mat-menu-item (click)="openEditLeadDialog()">
+          <mat-icon svgIcon="pencil"></mat-icon>
+          <span>Editar</span>
+        </button>
+        <button mat-menu-item (click)="openDeleteLeadDialog()">
+          <mat-icon svgIcon="delete"></mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
     </div>
 
+    <h5 class="font-medium w-full truncate">
+      {{ lead.name }}
+    </h5>
+    <p>{{ lead.createdAt | relativeTime }}</p>
+
+
     <div class="flex justify-between items-center">
-      <p>{{ lead.createdAt | date:'medium' }}</p>
+      <p>{{ lead.numberStudents }}</p>
+      <mat-icon svgIcon="human-child" class="text-gray-500"></mat-icon>
+
+      <span class="ml-auto"></span>
 
       <app-avatar
         round

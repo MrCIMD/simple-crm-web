@@ -107,4 +107,20 @@ export class ProspectsPanelService {
       };
     })
   }
+
+  public deleteLead(id: string) {
+    this.#state.update(previous => {
+      const payload = previous.data.map(state => {
+        return {
+          ...state,
+          prospects: state.prospects.filter(lead => lead.id !== id)
+        }
+      });
+
+      return {
+        ...previous,
+        data: payload
+      };
+    })
+  }
 }

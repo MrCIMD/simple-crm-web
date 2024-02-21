@@ -8,8 +8,11 @@ import { MatTooltip } from "@angular/material/tooltip";
 import { LeadDialogHeaderComponent } from "../lead-dialog-header/lead-dialog-header.component";
 import { FormToolsService } from "@services/form-tools.service";
 import { FormArray, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { MatError, MatFormField, MatLabel } from "@angular/material/form-field";
+import { MatError, MatFormField, MatLabel, MatPrefix } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
+import { MatOption, MatSelect } from "@angular/material/select";
+import { MatMenuItem } from "@angular/material/menu";
+import { MatTab, MatTabGroup, MatTabLabel } from "@angular/material/tabs";
 
 export type LeadFormData = {
   lead?: Lead;
@@ -33,7 +36,14 @@ export type LeadFormData = {
     MatError,
     MatFormField,
     MatInput,
-    MatLabel
+    MatLabel,
+    MatSelect,
+    MatOption,
+    MatPrefix,
+    MatMenuItem,
+    MatTabGroup,
+    MatTab,
+    MatTabLabel
   ],
   templateUrl: './lead-form-dialog.component.html',
   styles: ``
@@ -62,10 +72,10 @@ export class LeadFormDialogComponent implements OnInit {
     console.log(values);
   }
 
-  public addOfficialSiteForm() {
+  public addOfficialSiteForm(contactIndex: number) {
     const officialSiteFormGroup = this.buildOfficialSiteForm();
 
-    this.formOfficialSites().push(officialSiteFormGroup);
+    this.formMethods(contactIndex).push(officialSiteFormGroup);
   }
 
   public addContactForm() {
@@ -118,5 +128,13 @@ export class LeadFormDialogComponent implements OnInit {
       value: ['', Validators.required],
       note: [''],
     });
+  }
+
+  public removeContactFormGroup(i: number) {
+    this.formContacts().removeAt(i);
+  }
+
+  public removeMethodFormGroup(i: number, j: number) {
+    this.formMethods(i).removeAt(j)
   }
 }

@@ -1,6 +1,6 @@
 <div class="flex justify-between gap-4 items-center py-2 px-5">
   <h2 class="font-medium text-xl">
-    Eliminar {{dialogData?.name}}
+    ¿Deseas eliminar el siguiente registro?
   </h2>
   <button mat-icon-button mat-dialog-close>
     <mat-icon svgIcon="close"></mat-icon>
@@ -10,9 +10,12 @@
 <mat-divider/>
 
 <mat-dialog-content>
-  @if (dialogData?.id) {
-    <p>¿Estás seguro de que deseas eliminar este registro?</p>
-  }
+  <div>
+    <div class="flex gap-2">
+      <mat-icon svgIcon="circle" [style.color]="dialogData?.color"></mat-icon>
+      <p>{{ dialogData?.name }}</p>
+    </div>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>

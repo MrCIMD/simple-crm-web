@@ -1,6 +1,6 @@
 <div class="flex justify-between gap-4 items-center py-2 px-5">
   <h2 class="font-medium text-xl">
-    Eliminar Lead
+    ¿Deseas eliminar el siguiente registro?
   </h2>
   <button mat-icon-button mat-dialog-close>
     <mat-icon svgIcon="close"></mat-icon>
@@ -10,11 +10,73 @@
 <mat-divider/>
 
 <mat-dialog-content>
+  <div class="flex flex-col gap-3">
+    <p>
+      <span class="font-medium">Nombre:</span>
+      {{ dialogData.name }}
+    </p>
+    <p>
+      <span class="font-medium">Cantidad de estudiantes:</span>
+      {{ dialogData.numberStudents }}
+    </p>
+    <p class="font-medium">
+      Contactos:
+    </p>
+    <div class="flex flex-col gap-2">
+      @for (contact of dialogData.contacts; track contactIndex; let contactIndex = $index) {
+        <h3 class="font-medium">{{ contact.name }}</h3>
+        <ul class="list-disc">
+          @for (method of contact.methods; track methodIndex; let methodIndex = $index) {
+            <li class="flex gap-2">
+              @switch (method.type) {
+                @case (0) {
+                  <mat-icon svgIcon="whatsapp"></mat-icon>
+                }
+                @case (1) {
+                  <mat-icon svgIcon="phone"></mat-icon>
+                }
+                @case (2) {
+                  <mat-icon svgIcon="at"></mat-icon>
+                }
+              }
+              <p>{{ method.value }}</p>
+            </li>
+          }
+        </ul>
+        <mat-divider></mat-divider>
+      }
+      <p class="font-medium">
+        Sitios oficiales:
+      </p>
+      <ul class="list-disc">
+        @for (officialSite of dialogData.officialSites; track contactIndex; let contactIndex = $index) {
+          <li class="flex gap-2">
+            @switch (officialSite.type) {
+              @case (0) {
+                <mat-icon svgIcon="web"></mat-icon>
+              }
+              @case (1) {
+                <mat-icon svgIcon="facebook"></mat-icon>
+              }
+              @case (2) {
+                <mat-icon svgIcon="instagram"></mat-icon>
+              }
+              @case (3) {
+                <mat-icon svgIcon="linkedin"></mat-icon>
+              }
+            }
+            <p>{{ officialSite.value }}</p>
+          </li>
+        }
+      </ul>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <div class="flex flex-col w-full">
-    <button mat-flat-button color="warn">
+    <button mat-flat-button color="warn" (click)="deleteLead()">
       Eliminar
       <mat-icon svgIcon="delete"></mat-icon>
     </button>

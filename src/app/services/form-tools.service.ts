@@ -13,37 +13,39 @@ export class FormToolsService {
    * @param control - Controlador
    * @returns string - Descripción del error
    * */
-  public checkForErrorsIn(control: AbstractControl): string {
-    if (control.hasError('required')) {
-      return ERROR_MESSAGES['required']();
-    }
+  public checkForErrorsIn(control: AbstractControl | null): string {
+    if (control instanceof AbstractControl) {
+      if (control.hasError('required')) {
+        return ERROR_MESSAGES['required']();
+      }
 
-    if (control.hasError('minlength')) {
-      const error = control.getError('minlength');
+      if (control.hasError('minlength')) {
+        const error = control.getError('minlength');
 
-      return ERROR_MESSAGES['minLength'](`${error['requiredLength']}`);
-    }
+        return ERROR_MESSAGES['minLength'](`${error['requiredLength']}`);
+      }
 
-    if (control.hasError('maxlength')) {
-      const error = control.getError('maxlength');
+      if (control.hasError('maxlength')) {
+        const error = control.getError('maxlength');
 
-      return ERROR_MESSAGES['maxLength'](`${error['requiredLength']}`);
-    }
+        return ERROR_MESSAGES['maxLength'](`${error['requiredLength']}`);
+      }
 
-    if (control.hasError('min')) {
-      const error = control.getError('min');
+      if (control.hasError('min')) {
+        const error = control.getError('min');
 
-      return ERROR_MESSAGES['min'](`${error['min']}`);
-    }
+        return ERROR_MESSAGES['min'](`${error['min']}`);
+      }
 
-    if (control.hasError('max')) {
-      const error = control.getError('max');
+      if (control.hasError('max')) {
+        const error = control.getError('max');
 
-      return ERROR_MESSAGES['max'](`${error['max']}`);
-    }
+        return ERROR_MESSAGES['max'](`${error['max']}`);
+      }
 
-    if (control.hasError('email')) {
-      return ERROR_MESSAGES['email']();
+      if (control.hasError('email')) {
+        return ERROR_MESSAGES['email']();
+      }
     }
 
     return ''
