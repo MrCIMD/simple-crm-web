@@ -27,11 +27,9 @@ export class LeadCardComponent {
   @Input({required: true}) public state!: LeadState;
 
   public openTrackingLeadDialog() {
-
-
     this._dialog.open(LeadTrackerDialogComponent, {
       width: '90vw',
-      maxWidth: '48rem',
+      maxWidth: '64rem',
       autoFocus: false,
       data: this.lead
     });

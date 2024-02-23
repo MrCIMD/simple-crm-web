@@ -1,10 +1,11 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { catchError, delay, Observable, throwError } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { LeadState, LeadStateFormValues, SignalRequestState } from "@utils/types";
+import { Lead, LeadFormValues, LeadState, LeadStateFormValues, RoleEnum, SignalRequestState } from "@utils/types";
 import { dataPanelExample } from "@utils/data/panel.example";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { faker } from "@faker-js/faker";
+import { factoryUser } from "@utils/factories";
 
 @Injectable({
   providedIn: 'root',
@@ -76,6 +77,116 @@ export class ProspectsPanelService {
       previous.data = lists;
 
       return previous;
+    });
+  }
+
+  public updateLead(leadId: string, values: LeadFormValues) {
+    const lead: Partial<Lead> = {
+      name: values.name,
+      numberStudents: values.numberStudents,
+      contacts: values.contacts.map(contact => {
+        return {
+          name: contact.name,
+          methods: contact.methods.map(method => {
+            return {
+              type: method.type,
+              value: method.value,
+            }
+          })
+        }
+      }),
+      officialSites: values.officialSites.map(officialSite => {
+        return {
+          value: officialSite.value,
+          type: officialSite.type
+        }
+      }),
+    }
+
+    this.#state.update(previous => {
+      const states = previous.data.map(state => {
+        const prospects = state.prospects.map(prospect => {
+          if (prospect.id === leadId) {
+            return {
+              ...prospect,
+              ...lead
+            }
+          }
+          return {
+            ...prospect
+          }
+        });
+
+        return {
+          ...state,
+          prospects
+        }
+      });
+
+      return {
+        ...previous,
+        data: states
+      }
+    });
+  }
+
+  public createLead(stateId: string, values: LeadFormValues) {
+    const location = [
+      faker.location.latitude().toFixed(),
+      faker.location.longitude().toFixed(),
+    ];
+
+    const lead: Lead = {
+      id: faker.string.uuid(),
+      name: values.name,
+      numberStudents: values.numberStudents,
+      owner: factoryUser(RoleEnum.CONTRIBUTOR),
+      comments: [],
+      contacts: values.contacts.map(contact => {
+        return {
+          name: contact.name,
+          methods: contact.methods.map(method => {
+            return {
+              type: method.type,
+              value: method.value,
+              note: '',
+            }
+          })
+        }
+      }),
+      officialSites: values.officialSites.map(officialSite => {
+        return {
+          value: officialSite.value,
+          type: officialSite.type,
+          note: ''
+        }
+      }),
+      location,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+
+    this.#state.update(previous => {
+      const states = previous.data.map(state => {
+        const prospects = state.prospects;
+        if (state.id === stateId) {
+          lead.state = {
+            ...state,
+            prospects: []
+          }
+          prospects.push(lead)
+        }
+
+        return {
+          ...state,
+          prospects
+        }
+      });
+
+      return {
+        ...previous,
+        data: states
+      }
     });
   }
 

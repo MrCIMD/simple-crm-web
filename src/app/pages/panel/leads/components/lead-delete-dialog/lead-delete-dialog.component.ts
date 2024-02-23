@@ -12,6 +12,7 @@ import { MatButton, MatIconButton } from "@angular/material/button";
 import { Lead } from "@utils/types";
 import { ProspectsPanelService } from "@services/prospects-panel.service";
 import { MatList, MatListItem, MatListModule, MatListSubheaderCssMatStyler } from "@angular/material/list";
+import { LeadPreviewComponent } from "../lead-preview/lead-preview.component";
 
 @Component({
   selector: 'app-lead-delete-dialog',
@@ -24,7 +25,7 @@ import { MatList, MatListItem, MatListModule, MatListSubheaderCssMatStyler } fro
     MatIconButton,
     MatDialogActions,
     MatButton,
-    MatListItem
+    LeadPreviewComponent
   ],
   templateUrl: './lead-delete-dialog.component.html',
   styles: ``

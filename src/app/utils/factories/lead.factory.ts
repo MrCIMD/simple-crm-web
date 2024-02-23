@@ -89,13 +89,11 @@ export const createListLeadComments = (length: number): LeadComment[] => {
  * */
 export const factoryOfficialSite = (): OfficialSite => {
   const type = faker.helpers.enumValue(OfficialMedia);
-  const note = faker.lorem.sentence(5);
   const value = faker.internet.url();
 
   return {
     type,
     value,
-    note,
   }
 }
 
@@ -140,13 +138,11 @@ export const createListContacts = (length: number): Contact[] => {
  * */
 export const factoryContactMethod = (): ContactMethod => {
   const type = faker.helpers.enumValue(HowContact);
-  const note = faker.lorem.sentence(5);
   const value = factoryContactValue(type);
 
   return {
     value,
-    type,
-    note
+    type
   }
 }
 

@@ -1,5 +1,5 @@
-import { Interpretation, LeadState, Project, User } from "@utils/types";
-import { FormControl, FormGroup } from "@angular/forms";
+import { LeadState, Project, User } from "@utils/types";
+
 /**
  * Define el método de contacto preferido por el prospecto
  * */
@@ -24,7 +24,6 @@ export enum HowContact {
 export type ContactMethod = {
   type: HowContact;
   value: string;
-  note: string;
 }
 
 /*
@@ -64,7 +63,6 @@ export enum OfficialMedia {
 export type OfficialSite = {
   type: OfficialMedia;
   value: string;
-  note: string;
 }
 
 /**
@@ -94,7 +92,9 @@ export type Lead = {
   updatedAt: Date;
 }
 
-export type LeadForm = FormGroup<{
-  name: FormControl<string | null>;
-  numberStudents: FormControl<number | null>;
-}>;
+export type ContactFormValues = Pick<Contact, 'name'> & { methods: Pick<ContactMethod, 'value' | 'type'>[]}
+
+export type LeadFormValues = Pick<Lead, 'name' | 'numberStudents'> & {
+  contacts: ContactFormValues[];
+  officialSites: Pick<OfficialSite, 'value' | 'type'>[]
+}

@@ -1,1 +1,47 @@
-<p>lead-tracker-dialog works!</p>
+<div class="flex justify-between gap-4 items-center py-2 px-5">
+  @if (dialogData!.owner) {
+    <app-avatar round [size]="2" [source]="dialogData!.owner!.picture" [matTooltip]="dialogData!.owner!.name"/>
+  }
+
+  <h2 class="font-medium text-xl border-b-2" [style.border-bottom-color]="dialogData!.state!.color">
+    {{ dialogData.name }}
+  </h2>
+
+  <span class="ml-auto"></span>
+
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon svgIcon="close"></mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <div class="w-full flex gap-3">
+    <div class="w-full max-h-[calc(65vh-2.5rem)] overflow-y-auto flex flex-col">
+      <app-lead-preview
+        [lead]="dialogData"
+      />
+    </div>
+    <div class="w-full max-h-[calc(65vh-2.5rem)] overflow-y-hidden flex flex-col gap-2 rounded-lg">
+      <div class="flex flex-col gap-3 flex-1 overflow-y-auto bg-gray-200 p-2" #messagesContainer>
+        @for (comment of messages; track $index;) {
+          <div class="flex gap-2">
+            <app-avatar round [size]="2" [source]="comment?.owner!.picture" [matTooltip]="comment?.owner!.name"/>
+            <div class="bg-white shadow rounded-lg p-3 max-w-[20rem]">
+              <p>{{ comment.comment }}</p>
+              <p class="text-right text-xs mt-1">{{ comment.timestamp | relativeTime }}</p>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="flex gap-2">
+        <mat-form-field class="w-full">
+          <mat-label>Comentario</mat-label>
+          <textarea matInput [formControl]="messageControl" placeholder="Ex. Muestra interés..." (keydown.enter)="sendMessage()"></textarea>
+        </mat-form-field>
+        <button mat-icon-button color="primary" matTooltip="Enviar" (click)="sendMessage()">
+          <mat-icon svgIcon="send"></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

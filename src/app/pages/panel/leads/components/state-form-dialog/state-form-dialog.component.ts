@@ -76,13 +76,9 @@ export class StateFormDialogComponent implements OnInit {
   public submit(): void {
     if (this.formGroup.invalid) return;
 
-    const values = this.formGroup.getRawValue();
+    const values: any = this.formGroup.getRawValue();
 
-    this._panelService.createStateColumn({
-      name: `${values.name}`,
-      color: `${values.color}`,
-      interpretation: values.interpretation || Interpretation.DONE
-    });
+    this._panelService.createStateColumn(values);
 
     this._dialogRef.close(values)
   }
